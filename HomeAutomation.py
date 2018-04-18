@@ -28,6 +28,9 @@ GPIO.setmode(GPIO.BCM)
 ##    GPIO.cleanup()
 
 th = TempHumSensor(24, 19)
-th.measureTempHum()
+try:
+    th.measureTempHum()
+except:
+    pass
 
 GPIO.cleanup()
