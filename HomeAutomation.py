@@ -30,6 +30,7 @@ GPIO.setmode(GPIO.BCM)
 th = TempHumSensor(24, 19)
 try:
     th.measureTempHum()
+    th.unsetSignal()
 except:
     pass
 

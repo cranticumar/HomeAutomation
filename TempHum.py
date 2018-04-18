@@ -14,8 +14,18 @@ class TempHumSensor(Sensor):
         s = DHT22.sensor(pi, self.echoGPIO)
         s.trigger()
         time.sleep(0.03)
-        print 'humdity is {0}'.format(s.humidity()/1.0)
-        print 'temperature is {0}'.format(s.temperature() / 1.0)
+        hum = s.humidity()/1.0
+        temp = s.temperature() / 1.0
+        print 'humdity is {0}'.format(hum)
+        print 'temperature is {0}'.format(temp)
+        if hum > 30 or temp > 30:
+            print 'turning on AC'
+            self.setSignal()
+            time.sleep(5)
+        else:
+            print 'turning off AC'
+            self.unsetSignal()
+            time.sleep(5)
         s.cancel()
         time.sleep(0.5)
         pi.stop()
