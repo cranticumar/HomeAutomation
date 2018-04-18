@@ -5,8 +5,9 @@ class Sensor(object):
     def __init__(self, name, signalGPIO, **kwargs):
         super(Sensor, self).__init__()
         self.sensor = name
-        self.signalGPIO = signalGPIO
-        self.setupSignalGPIO()
+        if signalGPIO is not None:
+            self.signalGPIO = signalGPIO
+            self.setupSignalGPIO()
         self.__dict__.update(kwargs)
 
     def setupSignalGPIO(self):
