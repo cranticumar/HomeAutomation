@@ -20,11 +20,11 @@ class TempHumSensor(Sensor):
         print 'temperature is {0}'.format(temp)
         if hum > 30 or temp > 30:
             print 'turning on AC'
-            self.setSignal()
+            self.unsetSignal()
             time.sleep(5)
         else:
             print 'turning off AC'
-            self.unsetSignal()
+            self.setSignal()
             time.sleep(5)
         s.cancel()
         time.sleep(0.5)
