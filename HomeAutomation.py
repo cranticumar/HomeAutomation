@@ -2,12 +2,14 @@ import RPi.GPIO as GPIO
 from Distance import DistanceSensor
 from Motion import MotionSensor
 from TempHum import  TempHumSensor
+from Smoke import SmokeSensor
 import time
 import traceback
 
 # The script as below using BCM GPIO 00..nn numbers
 GPIO.setmode(GPIO.BCM)
 
+# %%%%%%% distance sensor %%%%%%%%%%%
 ##d = DistanceSensor(16, 20)
 ##dis = d.measureDistance()
 ##
@@ -19,6 +21,7 @@ GPIO.setmode(GPIO.BCM)
 ##    time.sleep(2)
 ##    GPIO.output(7, GPIO.LOW) 
 
+# %%%%% motion %%%%%%
 ##m = MotionSensor(8, 2)
 ##try:
 ##    m.detectMotion()
@@ -27,11 +30,23 @@ GPIO.setmode(GPIO.BCM)
 ##    traceback.print_exc()
 ##    GPIO.cleanup()
 
-th = TempHumSensor(24, 19)
+# %%%%% temperature and humidity %%%%%
+##th = TempHumSensor(24, 19)
+##try:
+##    th.measureTempHum()
+##    th.setSignal()
+##except:
+##    pass
+
+# %%%%%% smoke %%%%%%%%%
+
+s = SmokeSensor(25,26)
 try:
-    th.measureTempHum()
-    th.unsetSignal()
+    s.detectSmoke()
 except:
-    pass
+    print 'ended by Ctrl+C'
+    traceback.print_exc()
+    GPIO.cleanup()
+
 
 GPIO.cleanup()

@@ -6,7 +6,6 @@ class MotionSensor(Sensor):
         super(MotionSensor, self).__init__('Motion Sensor', trigGPIO, echoGPIO=echoGPIO)
 
     def detectMotion(self):
-        motionDetected = 0
         self.setupGPIO(self.echoGPIO, True)
 
         while True:
@@ -17,5 +16,5 @@ class MotionSensor(Sensor):
             elif motion == 1:
                 print "Intruder(s) detected"
                 self.setSignal()
-            time.sleep(0.1)
+            time.sleep(2)
         
